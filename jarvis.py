@@ -24,6 +24,10 @@ def date():
     speak(year)
 
 
+def greeting():
+    speak("Hello mister Ahmed Charfeddine")
+
+
 def takeCommand():
     r = sr.Recognizer()
     with sr.Microphone() as source:
@@ -40,5 +44,17 @@ def takeCommand():
         return "None"
     return query
 
+if __name__ == "__main__":
+    greeting()
+    while True:
+        query = takeCommand().lower()
 
-takeCommand()
+        if "time" in query:
+            time()
+        elif "date" in query:
+            date()
+        elif "stupid" in query:
+            speak('i am sorry mister Ahmed Charfeddine')
+        elif "shut down" in query:
+            speak('Sorry to leave you mister Ahmed Charfeddine')    
+            quit()
