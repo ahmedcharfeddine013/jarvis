@@ -1,6 +1,7 @@
 import pyttsx3
 import datetime
 import speech_recognition as sr
+import wikipedia
 
 engine = pyttsx3.init()
 
@@ -44,6 +45,7 @@ def takeCommand():
         return "None"
     return query
 
+
 if __name__ == "__main__":
     greeting()
     while True:
@@ -54,7 +56,13 @@ if __name__ == "__main__":
         elif "date" in query:
             date()
         elif "stupid" in query:
-            speak('i am sorry mister Ahmed Charfeddine')
+            speak("i am sorry mister Ahmed Charfeddine")
+        elif "wikipedia" in query:
+            speak("searching wikipedia...")
+            query = query.replace("wikipedia", "")
+            result = wikipedia.summary(query, sentences=2)
+            print(result)
+            speak(result)
         elif "shut down" in query:
-            speak('Sorry to leave you mister Ahmed Charfeddine')    
+            speak("Sorry to leave you mister Ahmed Charfeddine")
             quit()
