@@ -96,6 +96,18 @@ if __name__ == "__main__":
             os.system("shutdown /s /t 1")
         elif "restart" in query:
             os.system("shutdown /r /t 1")
+        # elif 'play songs' in query:
+        #     songs_dir = ''
+        elif "remember that" in query:
+            speak("what should i remember?")
+            data = takeCommand()
+            speak("you said to me to remember" + data)
+            remember = open("data.txt", "w")
+            remember.write(data)
+            remember.close()
+        elif "do you know anything" in query:
+            remember = open("data.txt", "r")
+            speak("you said me to remember that" + remember.read())
         elif "offline" in query:
             speak("Sorry to leave you mister Ahmed Charfeddine")
             quit()
