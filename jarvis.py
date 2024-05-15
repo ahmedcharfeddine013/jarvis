@@ -8,6 +8,8 @@ import os
 import pyautogui
 import random
 import string
+import psutil
+import pyjokes
 
 engine = pyttsx3.init()
 
@@ -73,6 +75,18 @@ def screenshot():
     img.save("screenshot/" + imgName + ".png")
 
 
+def cpu():
+    usage = str(psutil.cpu_percent())
+    speak("cpu is at" + usage)
+    battery = psutil.sensors_battery()
+    speak("Battery is at")
+    speak(battery.percent)
+
+
+def jokes():
+    speak(pyjokes.get_joke())
+
+
 if __name__ == "__main__":
     greeting()
     while True:
@@ -126,6 +140,10 @@ if __name__ == "__main__":
         elif "screenshot" in query:
             screenshot()
             speak("Screenshot done!")
+        elif "cpu" in query:
+            cpu()
+        elif "joke" in query:
+            jokes()
         elif "offline" in query:
             speak("Sorry to leave you mister Ahmed Charfeddine")
             quit()
