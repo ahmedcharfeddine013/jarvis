@@ -4,6 +4,7 @@ import speech_recognition as sr
 import wikipedia
 import smtplib
 import webbrowser as wb
+import os
 
 engine = pyttsx3.init()
 
@@ -89,7 +90,12 @@ if __name__ == "__main__":
             chromepath = "C:/Program Files/Google/Chrome/Application/chrome.exe %s"
             search = takeCommand().lower()
             wb.get(chromepath).open_new_tab(search + ".com")
-
-        elif "shut down" in query:
+        elif "logout" in query:
+            os.system("shutdown -l")
+        elif "shutdown" in query:
+            os.system("shutdown /s /t 1")
+        elif "restart" in query:
+            os.system("shutdown /r /t 1")
+        elif "offline" in query:
             speak("Sorry to leave you mister Ahmed Charfeddine")
             quit()
