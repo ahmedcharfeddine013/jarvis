@@ -5,6 +5,9 @@ import wikipedia
 import smtplib
 import webbrowser as wb
 import os
+import pyautogui
+import random
+import string
 
 engine = pyttsx3.init()
 
@@ -58,6 +61,18 @@ def sendEmail(to, content):
     server.close()
 
 
+def generate_random_name(length=5):
+    # """Generate a random name for saving images."""
+    letters_and_digits = string.ascii_letters + string.digits
+    return "".join(random.choice(letters_and_digits) for _ in range(length))
+
+
+def screenshot():
+    img = pyautogui.screenshot()
+    imgName = generate_random_name()
+    img.save("screenshot/" + imgName + ".png")
+
+
 if __name__ == "__main__":
     greeting()
     while True:
@@ -85,11 +100,11 @@ if __name__ == "__main__":
             except Exception as e:
                 print(e)
                 speak("sorry there was an error")
-        elif "in Chrome":
-            speak("what should i search?")
-            chromepath = "C:/Program Files/Google/Chrome/Application/chrome.exe %s"
-            search = takeCommand().lower()
-            wb.get(chromepath).open_new_tab(search + ".com")
+        # elif "in Chrome":
+        #     speak("what should i search?")
+        #     chromepath = "C:/Program Files/Google/Chrome/Application/chrome.exe %s"
+        #     search = takeCommand().lower()
+        #     wb.get(chromepath).open_new_tab(search + ".com")
         elif "logout" in query:
             os.system("shutdown -l")
         elif "shutdown" in query:
@@ -108,6 +123,9 @@ if __name__ == "__main__":
         elif "do you know anything" in query:
             remember = open("data.txt", "r")
             speak("you said me to remember that" + remember.read())
+        elif "screenshot" in query:
+            screenshot()
+            speak("Screenshot done!")
         elif "offline" in query:
             speak("Sorry to leave you mister Ahmed Charfeddine")
             quit()
