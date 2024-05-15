@@ -3,6 +3,7 @@ import datetime
 import speech_recognition as sr
 import wikipedia
 import smtplib
+import webbrowser as wb
 
 engine = pyttsx3.init()
 
@@ -83,6 +84,12 @@ if __name__ == "__main__":
             except Exception as e:
                 print(e)
                 speak("sorry there was an error")
+        elif "in Chrome":
+            speak("what should i search?")
+            chromepath = "C:/Program Files/Google/Chrome/Application/chrome.exe %s"
+            search = takeCommand().lower()
+            wb.get(chromepath).open_new_tab(search + ".com")
+
         elif "shut down" in query:
             speak("Sorry to leave you mister Ahmed Charfeddine")
             quit()
